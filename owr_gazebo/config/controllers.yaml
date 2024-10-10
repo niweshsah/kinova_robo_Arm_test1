@@ -78,50 +78,51 @@ joint_group_position_controller:
     - W2J
     - W3J
 
-# #Position controllers
-# BJ_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: BJ
-#   # pid:  {p: 100,  d: 0.2, i: 100}
-# SJ_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: SJ
-#   # pid:  {p: 100,  d: 1.0, i: 200}
-# EJ_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: EJ
-#   # pid:  {p: 100,  d: 0.2, i: 100}
-# W1J_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: W1J
-#   # pid:  {p: 100,  d: 0.2, i: 100}
-# W2J_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: W2J
-#   # pid:  {p: 100,  d: 0.2, i: 100}
-# W3J_position_controller:
-#   type: position_controllers/JointPositionController
-#   joint: W3J
-#   # pid:  {p: 100,  d: 0.2, i: 100}
+#Position controllers
+
+BJ_position_controller:
+  type: position_controllers/JointPositionController
+  joint: BJ
+  pid:  {p: 100,  d: 0.2, i: 100}
+SJ_position_controller:
+  type: position_controllers/JointPositionController
+  joint: SJ
+  pid:  {p: 100,  d: 1.0, i: 200}
+EJ_position_controller:
+  type: position_controllers/JointPositionController
+  joint: EJ
+  pid:  {p: 100,  d: 0.2, i: 100}
+W1J_position_controller:
+  type: position_controllers/JointPositionController
+  joint: W1J
+  pid:  {p: 100,  d: 0.2, i: 100}
+W2J_position_controller:
+  type: position_controllers/JointPositionController
+  joint: W2J
+  pid:  {p: 100,  d: 0.2, i: 100}
+W3J_position_controller:
+  type: position_controllers/JointPositionController
+  joint: W3J
+  pid:  {p: 100,  d: 0.2, i: 100}
 
 # Gripper controller  
-# gripper_manipulator_controller:
-#   type: position_controllers/JointTrajectoryController
-#   joints:
-#      - finger_joint
-#   constraints:
-#       goal_time: 0.6
-#       stopped_velocity_tolerance: 0.05
-#       finger_joint: {trajectory: 0.1, goal: 0.1}
-#   stop_trajectory_duration: 0.5
-#   state_publish_rate:  25
-#   action_monitor_rate: 10
+gripper_manipulator_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+     - finger_joint
+  constraints:
+      goal_time: 0.6
+      stopped_velocity_tolerance: 0.05
+      finger_joint: {trajectory: 0.1, goal: 0.1}
+  stop_trajectory_duration: 0.5
+  state_publish_rate:  25
+  action_monitor_rate: 10
 
-# gripper_manipulator_controller:
-#   type: position_controllers/JointTrajectoryController
-#   joints: 
-#     - finger_joint1
-#     - finger_joint2
-  # gains:
-  #   finger_joint1: {p: 750.0, i: 1, d: 10.0}
-  #   finger_joint2: {p: 750.0, i: 1, d: 10.0}
+gripper_manipulator_controller:
+  type: position_controllers/JointTrajectoryController
+  joints: 
+    - finger_joint1
+    - finger_joint2
+  gains:
+    finger_joint1: {p: 750.0, i: 1, d: 10.0}
+    finger_joint2: {p: 750.0, i: 1, d: 10.0}
