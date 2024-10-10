@@ -61,12 +61,12 @@
             args="-param robot_description -urdf -unpause -z 0.594 -model owr -J owr::SJ -1.8 -J owr::EJ -1.0"
             output="screen" /> -->
 
-      <node name="spawn_gazebo_model" 
+      <!-- <node name="spawn_gazebo_model" 
             pkg="gazebo_ros" 
             type="spawn_model" 
             respawn="false"
             output="screen"
-            args="-param robot_description -urdf -model owr_gripper"/> 
+            args="-param robot_description -urdf -model owr_gripper"/>  -->
 
       <!-- spawn (robotic arm mode + camera) model in gazebo (at position specified in
       owr_robot.urdf.xacro)-->
@@ -79,24 +79,43 @@
                   -J finger_joint 0.0245316" />-->
       <!--############################################################################################-->
       <!-- Spawn the robot in Gazebo -->
-      <!--<node name="spawn_gazebo_model" 
+      <node name="spawn_gazebo_model" 
             pkg="gazebo_ros" 
             type="spawn_model" 
             args="-urdf -param robot_description -model owr_gripper $(arg unpause) $(arg world_pose) $(arg initial_joint_positions)"
             respawn="false" 
-            output="screen" />-->
+            output="screen" />
             <!--############################################################################################-->
 
-      <!-- <node  name="spawn_setup_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false"
+      <node  name="spawn_setup_gazebo_model" pkg="gazebo_ros" type="spawn_model" respawn="false"
                   output="screen"
                   args="-param setup_description -urdf 
                         -x 0.828830 -y -0.93032 -z 0.003412 -R 0.001679 
                         -P 0.0 -Y 1.566213 -model setup"/>
-       -->
+      
 
       <!-- Start controllers  -->
       <include file="$(find owr_gazebo)/launch/owr_control.launch" />
 
-      <!--<rosparam
-      file="$(find owr_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>-->
+      <rosparam
+      file="$(find owr_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>
 </launch>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

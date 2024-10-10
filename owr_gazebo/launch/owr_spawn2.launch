@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Export environment variable so that Gazebo finds our models -->
+    <env name="GAZEBO_MODEL_PATH"
+         value="$(find owr_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+    <!-- Launch file parameters -->
+    <arg name="paused" default="false" />
+    <arg name="debug" default="false" />
+    <arg name="headless" default="false" />
+    <arg name="gui" default="true" /> <!-- Set to true for GUI -->
+    <arg name="use_sim_time" default="true" />
+    <arg name="limited" default="false" />
+    
+    <!-- World Pose -->
+    <arg name="world_pose" default="-x 1 -y 1 -z 1 -R 0 -P 0 -Y 0" 
+         doc="Pose to spawn the robot at" />
+         
+    <!-- Initial Joint Positions -->
+    <arg name="initial_joint_positions" 
+         default="-J BJ 0 -J EJ 0 -J SJ 0 -J W1J 0 -J W2J 0 -J W3J 0 -J finger_joint 0.04" 
+         doc="Initial joint configuration of the robot" />
+
+    <!-- Unpause the simulation after loading the robot model -->
+    <arg name="unpause" value="$(eval '' if arg('paused') else '-unpause')" />
+
+    <!-- World Name -->
+    <arg name="world_name" default="$(find owr_gazebo)/worlds/demo.world" /> 
+
+    <!-- Start up simulated world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)" />
+        <arg name="use_sim_time" value="$(arg use_sim_time)" />
+        <arg name="paused" value="$(arg paused)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="headless" value="$(arg headless)" />
+    </include>
+
+    <!-- Send robot URDF to parameter server -->
+    <include file="$(find owr_gazebo)/launch/owr_description.launch" />
+
+    <!-- Spawn the robot in Gazebo -->
+    <node name="spawn_gazebo_model" 
+          pkg="gazebo_ros" 
+          type="spawn_model" 
+          args="-urdf -param robot_description -model owr_gripper 
+                $(arg unpause) $(arg world_pose) $(arg initial_joint_positions)"
+          respawn="false" 
+          output="screen" />
+
+    <!-- Spawn additional setup model if needed -->
+    <!-- <node name="spawn_setup_gazebo_model" 
+          pkg="gazebo_ros" 
+          type="spawn_model" 
+          respawn="false"
+          output="screen"
+          args="-param setup_description -urdf 
+                -x 0.828830 -y -0.93032 -z 0.003412 -R 0.001679 
+                -P 0.0 -Y 1.566213 -model setup"/> -->
+
+    <!-- Start controllers -->
+    <include file="$(find owr_gazebo)/launch/owr_control.launch" />
+
+    <!-- Load ROS control parameters -->
+    <rosparam file="$(find owr_gazebo)/config/gazebo_ros_control_params.yaml" command="load"/>
+</launch>
