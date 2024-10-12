@@ -1,6 +1,13 @@
 # 6-dof-robotic-arm
 6 DOF Robotic Arm (ROS + Gazebo)
 
+## Error
+If you have error regarding " nlopt ", just do:
+
+    sudo apt install libnlopt-cxx-dev
+
+
+
 
 ### Installation
 Clone the repository using:
