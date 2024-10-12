@@ -7,14 +7,14 @@ Clone the repository using:
 
     git clone https://github.com/anubhav1772/6-dof-robotic-arm.git
 
-Run catkin_make in your ROS source directory
+Run catkin build in your ROS source directory
 
     $ cd ~/catkin_ws
-    $ catkin_make
+    $ catkin build
 
 Start the simulation using:
 
-    $ roslaunch owr_gazebo owr_spawn.launch
+    $ roslaunch owr_gazebo owr_spawn2.launch
 
 Launch moveit and rviz:
 
