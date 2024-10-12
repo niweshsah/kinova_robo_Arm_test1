@@ -5,7 +5,7 @@
 ### Installation
 Clone the repository using:
 
-    git clone https://github.com/anubhav1772/6-dof-robotic-arm.git
+    git clone https://github.com/niweshsah/kinova_robo_Arm_test1.git
 
 Run catkin build in your ROS source directory
 
